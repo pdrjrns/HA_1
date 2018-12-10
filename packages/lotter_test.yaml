@@ -1,0 +1,42 @@
+group:
+  lotteri:
+    icon: mdi:gamepad
+    view: true
+    entities:
+      - input_number.lottery_choice
+      - sensor.random_sensor
+      - sensor.lott_win
+      - script.my_game
+
+input_number:
+  lottery_choice:
+    name: Mitt lilla lotteri
+    min: 1
+    max: 20
+    step: 1
+    icon: mdi:counter
+
+sensor:
+  - platform: template
+    sensors:
+      lott_win:
+        friendly_name: "Lotteri vist"
+        entity_id: sensor.random_sensor
+        value_template: >
+          {{ states('input_number.lottery_choice') | int  ==
+          states('sensor.random_sensor') | int }}
+
+
+script:
+  my_game:
+    alias: my game
+    sequence:
+      - service: persistent_notification.create
+        data_template:
+          message: Hi there 
+           ch gt rnd
+           {{ states('input_number.lottery_choice') | int  >  states('sensor.random_sensor') | int }}
+           ch eq rnd
+           {{ states('input_number.lottery_choice') | int ==  states('sensor.random_sensor') | int }}
+           ch ls rnd
+           {{ states('input_number.lottery_choice') | int <  states('sensor.random_sensor') | int }}

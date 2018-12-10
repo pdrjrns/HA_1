@@ -1,0 +1,119 @@
+group:
+  radio:
+    name: Radio
+    view: true
+    icon: mdi:radio
+    entities:
+    - input_select.radio_station
+    - input_select.chromecast_radio
+    - script.radio
+    - input_number.volume_radio
+    - media_player.hogtalare_1
+    - media_player.tv_uppe
+
+input_select:
+  radio_station:
+    name: 'Select Radio Station:'
+    options:
+      - P3
+      - P4
+      - Hit 92-9
+      - Nova 93-7
+      - Mix 94-5
+      - 96FM
+      - 80's
+      - OldSkool Hits
+      - Raw FM (dance)
+      - 181FM Power (Todays Hits)
+      - 181FM 90's Dance
+      - 181FM Star 90's
+      - 181FM The Breeze
+      - Heat Radio (RnB)
+      - Fresh 92-7
+      - DI Chill & Tropical House
+      - DI Disco House
+      - DI Funky House
+      - DI Liquid D&B
+    initial: Raw FM (dance)
+    icon: mdi:radio
+    
+  chromecast_radio:
+    name: 'Select Speakers:'
+    options:
+      - Lounge
+      - TV Uppe
+      - House
+    initial: Lounge
+    icon: mdi:speaker-wireless
+
+input_number: 
+  volume_radio:
+    name: Volume
+    icon: mdi:volume-high
+    min: 0
+    max: 1
+    step: 0.05
+
+automation:
+  - alias: Listen Radio
+    hide_entity: True
+    trigger:
+      - platform: state
+        entity_id: input_select.radio_station
+    action: 
+      - service: script.radio
+  - alias: Set Chromecast Radio Volume
+    trigger:
+      platform: state
+      entity_id: input_number.volume_radio
+    action:
+      service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.hogtalare_1
+          {% elif is_state("input_select.chromecast_radio", "TV Uppe") %} media_player.TV_Uppe
+          {% elif is_state("input_select.chromecast_radio", "House") %} media_player.house
+          {% endif %}
+        volume_level: '{{  states.input_number.volume_radio.state  }}'
+
+script:
+  radio:
+    alias: Play Radio on Chromecast Audio
+    sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.hogtalare_1
+          {% elif is_state("input_select.chromecast_radio", "TV Uppe") %} media_player.TV_Uppe
+          {% elif is_state("input_select.chromecast_radio", "House") %} media_player.house
+          {% endif %}
+        volume_level: '{{  states.input_number.volume_radio.state  }}' 
+    - service: media_player.play_media
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.hogtalare_1
+          {% elif is_state("input_select.chromecast_radio", "TV Uppe") %} media_player.TV_Uppe
+          {% elif is_state("input_select.chromecast_radio", "House") %} media_player.house
+          {% endif %}
+        media_content_id: >
+          {% if is_state("input_select.radio_station", "Hit 92-9") %} http://sc01.scahw.com.au/6ppm_32
+          {% elif is_state("input_select.radio_station", "Nova 93-7") %} http://streaming.novaentertainment.com.au/nova937
+          {% elif is_state("input_select.radio_station", "Mix 94-5") %} http://sc01.scahw.com.au/6mix_32
+          {% elif is_state("input_select.radio_station", "96FM") %} https://icy.ihrcast.arn.com.au/au_012_icy
+          {% elif is_state("input_select.radio_station", "80's") %} http://streaming.the80s.com.au/;stream/1
+          {% elif is_state("input_select.radio_station", "OldSkool Hits") %} http://sc01.scahw.com.au/loveland_32
+          {% elif is_state("input_select.radio_station", "Raw FM (dance)") %} http://stream.rawfm.com.au:8000/;stream.nsv
+          {% elif is_state("input_select.radio_station", "181FM Power (Todays Hits)") %} http://listen.181fm.com/181-power_128k.mp3?
+          {% elif is_state("input_select.radio_station", "181FM 90's Dance") %} http://listen.181fm.com/181-90sdance_128k.mp3
+          {% elif is_state("input_select.radio_station", "181FM Star 90's") %} http://listen.181fm.com/181-star90s_128k.mp3
+          {% elif is_state("input_select.radio_station", "181FM The Breeze") %} http://listen.181fm.com/181-breeze_128k.mp3
+          {% elif is_state("input_select.radio_station", "Heat Radio (RnB)") %} http://174.37.159.206:8106/stream
+          {% elif is_state("input_select.radio_station", "Fresh 92-7") %} http://live.fresh927.com.au/freshmp3
+          {% elif is_state("input_select.radio_station", "DI Chill & Tropical House") %} http://pub1.diforfree.org:8000/di_chillntropicalhouse_hi
+          {% elif is_state("input_select.radio_station", "DI Disco House") %} http://pub1.diforfree.org:8000/di_discohouse_hi
+          {% elif is_state("input_select.radio_station", "DI Funky House") %} http://pub1.diforfree.org:8000/di_funkyhouse_hi
+          {% elif is_state("input_select.radio_station", "DI Liquid D&B") %} http://pub1.diforfree.org:8000/di_liquiddnb_hi
+          {% elif is_state("input_select.radio_station", "P3") %} https://sverigesradio.se/topsy/direkt/164-hi.mp3
+          {% elif is_state("input_select.radio_station", "P4") %} https://sverigesradio.se/topsy/direkt/206-hi.mp3
+          {% endif %}
+        media_content_type: 'audio/mp4'

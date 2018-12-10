@@ -1,0 +1,14 @@
+
+- id: '1543957757114'
+  alias: Alert Low speed
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.speedtest_download
+    below: 90
+  condition: []
+  action:
+    service: persistent_notification.create
+    data_template:
+      title: Dåligt internet
+      message: 'Dålig nerladdning: {{ now() }} nerladdning: {{ states(''sensor.speedtest_download'') }} '
+

@@ -1,0 +1,120 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: mGard
+  # Location required to calculate the time the sun rises and sets
+  latitude: 57.6849606
+  longitude: 13.0508401
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 220
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Stockholm
+  # Customization file
+  customize: !include customize.yaml
+  packages: !include_dir_named packages # package setup 
+
+# Show links to resources in log and frontend
+introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Sensors
+sensor:
+  # Weather prediction
+  - platform: yr
+  # CPU Speed
+  - platform: cpuspeed
+  # Network speed
+  - platform: speedtest
+    server_id: 6062
+    minute:
+      - 0
+      - 30
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+  # Random for testing
+  - platform: random
+  # --- Moone -
+  - platform: moon
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+# cloud:
+
+# Zone
+zone:
+
+# Workday
+binary_sensor:
+  - platform: workday
+    country: SE
+
+# History graphs
+history_graph:
+  gr_network_speed:
+    name: Network Speed
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+    hours_to_show: 240
+    refresh: 30
+  gr_ping:
+    name: ping
+    entities:
+      - sensor.speedtest_ping
+    hours_to_show: 240
+    refresh: 30
+  gr_temperatue:
+    name: Temperature
+    entities:
+      - sensor.1_ute_temperature
+      - sensor.2_uppe_temperature
+      - sensor.3_nere_temperature
+    hours_to_show: 220
+#    refresh: 60
+
+
+# -- Include files ---
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

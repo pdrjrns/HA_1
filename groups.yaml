@@ -1,0 +1,40 @@
+# --------- Views -------
+# View for weather information
+view_weather:
+  name: Väder
+  icon: mdi:weather-partlycloudy
+  view: true
+  entities:
+    - weather.smhi_malsryd
+    - history_graph.temperature
+    - group.group_my_temperature
+
+# View with network information
+view_network:
+  name: Nätverk
+  icon: mdi:access-point-network
+  view: true
+  entities:
+    - history_graph.network_speed
+    - history_graph.ping
+    - sensor.cpu_speed
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
+
+# ---- Groups -----
+group_nw_performance:
+  name: Network
+  entities:
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
+    - sensor.cpu_speed
+
+group_my_temperature:
+  name: Termometrar
+  view: false
+  entities:
+    - sensor.1_ute_temperature
+    - sensor.2_uppe_temperature
+    - sensor.3_nere_temperature

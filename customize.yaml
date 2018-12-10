@@ -1,0 +1,6 @@
+switch.01_axel:
+  icon: mdi:smile
+weather.smhi_malsryd:
+  hidden: false
+sensor.speedtest_ping:
+  rgb_color: 200,100,30
