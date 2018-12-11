@@ -14,36 +14,36 @@ group:
       - switch.06_fackla
 
 automation:
-  alias: Turn on at sun sets
-  initial_state: True
-  hide_entity: False
-  trigger:
-    platform: sun
-    event: sunset
-    offset: "-01:00:00"
-  action:
-    service: light.turn_on
-    entity_id: group.telldusLights
+  - alias: Turn on at sun sets
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: sun
+      event: sunset
+      offset: "-01:00:00"
+    action:
+      service: switch.turn_on
+      entity_id: group.telldusLights
 
-  alias: Turn off when sun rise
-  initial_state: True
-  hide_entity: False
-  trigger:
-    platform: sun
-    event: sunrise
-    offset: "01:00:00"
-  action:
-    service: light.turn_off
-    entity_id: group.telldusLights
+  - alias: Turn off when sun rise
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: sun
+      event: sunrise
+      offset: "01:00:00"
+    action:
+      service: switch.turn_off
+      entity_id: group.telldusLights
 
-  alias: Turn off the lights at evening
-  initial_state: True
-  hide_entity: False
-  trigger:
-    platform: time
-    at: "23:00:00"
-  action:
-    service: light.turn_off
-    entity_id: group.telldusLights
+  - alias: Turn off the lights at evening
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: time
+      at: "23:00:00"
+    action:
+      service: switch.turn_off
+      entity_id: group.telldusLights
   
 

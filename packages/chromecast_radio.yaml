@@ -17,6 +17,7 @@ input_select:
     options:
       - P3
       - P4
+      - Senaste Ekot
       - Hit 92-9
       - Nova 93-7
       - Mix 94-5
@@ -34,7 +35,7 @@ input_select:
       - DI Disco House
       - DI Funky House
       - DI Liquid D&B
-    initial: Raw FM (dance)
+    initial: P3
     icon: mdi:radio
     
   chromecast_radio:
@@ -115,5 +116,6 @@ script:
           {% elif is_state("input_select.radio_station", "DI Liquid D&B") %} http://pub1.diforfree.org:8000/di_liquiddnb_hi
           {% elif is_state("input_select.radio_station", "P3") %} https://sverigesradio.se/topsy/direkt/164-hi.mp3
           {% elif is_state("input_select.radio_station", "P4") %} https://sverigesradio.se/topsy/direkt/206-hi.mp3
+          {% elif is_state("input_select.radio_station", "Senaste Ekot") %} {{ states('sensor.senaste_eko') }}
           {% endif %}
         media_content_type: 'audio/mp4'

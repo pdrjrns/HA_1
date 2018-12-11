@@ -1,0 +1,12 @@
+# Get latest Eko url
+
+sensor:
+  - platform: scrape
+    resource: https://www.home-assistant.io
+    select: ".current-version h1"
+
+  - platform: scrape
+    resource: https://api.sr.se/api/rss/pod/3795
+    name: Senaste eko
+    select: 'enclosure:nth-of-type(1)'
+    attribute: url
