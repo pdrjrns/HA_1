@@ -5,13 +5,30 @@ group:
     icon: mdi:lightbulb
     entities:
       - group.telldusLights
+      - group.ikeaKronLjus
+      - group.kokMatbord
 
   telldusLights:
     name: LampGrupp1
     view: false
     entities:
-      - switch.08_tvmat
-      - switch.06_fackla
+      - switch.TD06
+      - switch.TD07
+      - switch.TD08
+
+  kokMatbord:
+    name: Kok mat
+    view: false
+    entities:
+      - light.kok1
+      - light.kok2
+  
+  ikeaKronLjus:
+    name: LampGrupp2
+    view: false
+    entities:
+      - light.kron1
+
 
 automation:
   - alias: Turn on at sun sets
@@ -43,7 +60,10 @@ automation:
       platform: time
       at: "23:00:00"
     action:
-      service: switch.turn_off
-      entity_id: group.telldusLights
-  
+      - service: switch.turn_off
+        entity_id: group.telldusLights
+      - service: light.turn_on
+        data:
+          brightness: 10
+          entity_id: light.kron1
 

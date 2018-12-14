@@ -1,0 +1,30 @@
+#################################################
+#                                               #
+#  Some stuff for server monitoring             #
+#                                               #
+#################################################
+
+sensor:
+  # CPU Speed
+#  - platform: cpuspeed
+
+  # Network speed
+  - platform: speedtest
+    server_id: 6062
+    minute:
+#      - 0
+      - 30
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+# System monitor
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+

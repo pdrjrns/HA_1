@@ -62,18 +62,18 @@ sun:
 sensor:
   # Weather prediction
   - platform: yr
-  # CPU Speed
-  - platform: cpuspeed
-  # Network speed
-  - platform: speedtest
-    server_id: 6062
-    minute:
-      - 0
-      - 30
-    monitored_conditions:
-      - ping
-      - download
-      - upload
+#  # CPU Speed
+#  - platform: cpuspeed
+#  # Network speed
+#  - platform: speedtest
+#    server_id: 6062
+#    minute:
+#      - 0
+#      - 30
+#    monitored_conditions:
+#      - ping
+#      - download
+#      - upload
   # Random for testing
 #  - platform: random
   # --- Moone -
