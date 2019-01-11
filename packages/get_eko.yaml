@@ -3,7 +3,11 @@
 sensor:
   - platform: scrape
     resource: https://www.home-assistant.io
+    name: Release
     select: ".current-version h1"
+    value_template: '{{ value.split(":")[1] }}'
+
+
 
   - platform: scrape
     resource: https://api.sr.se/api/rss/pod/3795

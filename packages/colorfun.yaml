@@ -1,0 +1,16 @@
+automation:
+  alias: 'ColorFun'
+  initial_state: 'off'
+  trigger:
+    platform: time
+#    minutes: '/2'
+    seconds: '/90'
+  action:
+    service: light.turn_on
+    entity_id: 
+      - light.light_6
+    data_template:
+      color_name: '{{ ["hotpink", "peru",  "red", "blue", "orange", "green", "yellow", "pink", "yellowgreen", "lime", "lightgreen","lightcoral", "gold"] | random }}'
+      transition: 30
+      brightness_pct: 1
+# https://www.w3.org/TR/css-color-3/#svg-color

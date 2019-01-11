@@ -71,7 +71,7 @@ automation:
       service: media_player.volume_set
       data_template:
         entity_id: >
-          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.hogtalare_1
+          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.nere1
           {% elif is_state("input_select.chromecast_radio", "TV Uppe") %} media_player.TV_Uppe
           {% elif is_state("input_select.chromecast_radio", "House") %} media_player.house
           {% endif %}
@@ -84,7 +84,7 @@ script:
     - service: media_player.volume_set
       data_template:
         entity_id: >
-          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.hogtalare_1
+          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.nere1
           {% elif is_state("input_select.chromecast_radio", "TV Uppe") %} media_player.TV_Uppe
           {% elif is_state("input_select.chromecast_radio", "House") %} media_player.house
           {% endif %}
@@ -92,7 +92,7 @@ script:
     - service: media_player.play_media
       data_template:
         entity_id: >
-          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.hogtalare_1
+          {% if is_state("input_select.chromecast_radio", "Lounge") %} media_player.nere1
           {% elif is_state("input_select.chromecast_radio", "TV Uppe") %} media_player.TV_Uppe
           {% elif is_state("input_select.chromecast_radio", "House") %} media_player.house
           {% endif %}

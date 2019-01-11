@@ -1,0 +1,12 @@
+# lite när man kommer hem
+  
+automation:
+  trigger:
+    platform: state
+    entity_id:  device_tracker.peddophone
+    from: 'away'
+    to: 'home'
+  action:
+    service: persistent_notification.create
+    data:
+      message: 'Person is now home at {{ now() }}'

@@ -52,6 +52,8 @@ history:
 # View all events in a logbook
 logbook:
 
+
+
 # Enables a map showing the location of tracked devices
 map:
 
@@ -117,4 +119,33 @@ history_graph:
     hours_to_show: 220
 #    refresh: 60
 
+
+# Devie tracker test
+device_tracker:
+  - platform: unifi
+    host: 192.168.0.25
+    username: !secret unifi_username
+    password: !secret unifi_password
+    site_id: !secret unifi_site
+    verify_ssl: false
+    new_device_defaults:
+      track_new_devices: false
+
+cast:
+  media_player:
+    - host: 192.168.0.10
+    - host: 192.168.0.11
+
+
+# debug deConz 181216
+logger:
+  default: info
+#  logs:
+#    pydeconz: debug
+#    homeassistant.components.deconz: debug
+
+# ----- Some test ---
+# BT track 181219
+#device_tracker:
+#  - platform: bluetooth_tracker
 

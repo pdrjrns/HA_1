@@ -8,6 +8,11 @@ view_weather:
     - weather.smhi_malsryd
     - history_graph.temperature
     - group.group_my_temperature
+    - sun.sun
+    - sensor.moon
+    - sensor.daylight
+    - sensor.yr_symbol
+
 
 # View with network information
 view_network:
@@ -21,6 +26,7 @@ view_network:
     - sensor.speedtest_download
     - sensor.speedtest_upload
     - sensor.speedtest_ping
+    - sensor.release
 
 # ---- Groups -----
 group_nw_performance:
