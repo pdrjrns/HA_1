@@ -1,0 +1,30 @@
+# Saker på första sidan #
+group:
+  default_view:
+    name: myStart
+    icon: mdi:home
+    view: true
+    entities:
+      - group.vara_rum
+
+  vara_rum:  
+    view: false
+    name: rum
+    entities:
+      - light.kok
+      - light.hall
+      - light.matsal
+      - light.tvattstuga
+      - light.axel
+
+  thefamily:
+    name: Familjen
+    view: true
+    icon: mdi:account-multiple
+    entities:
+      - device_tracker.axelsiphone
+      - device_tracker.lisasiphone
+      - device_tracker.peddophone
+      - device_tracker.ulricasiphone
+      - device_tracker.ulricasiphone_2
+

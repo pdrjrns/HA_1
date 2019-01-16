@@ -16,11 +16,11 @@ group:
       - switch.TD07
       - switch.TD08
 
-  ikeaKronLjus:
-    name: LampGrupp2
-    view: false
-    entities:
-      - light.kron1
+#  ikeaKronLjus:
+#    name: LampGrupp2
+#    view: false
+#    entities:
+#      - light.kron1
 
 light:
   platform: group
@@ -31,142 +31,77 @@ light:
 
 
 
-automation:
-  - alias: Turn on at sun sets
-    initial_state: True
-    hide_entity: False
-    trigger:
-      platform: sun
-      event: sunset
-      offset: "-01:00:00"
-    action:
-      service: switch.turn_on
-      entity_id: group.telldusLights
+#automation:
+#  - alias: Turn on at sun sets
+#    initial_state: True
+#    hide_entity: False
+#    trigger:
+#      platform: sun
+#      event: sunset
+#      offset: "-01:00:00"
+#    action:
+#      service: switch.turn_on
+#      entity_id: group.telldusLights
 
-  - alias: Turn off when sun rise
-    initial_state: True
-    hide_entity: False
-    trigger:
-      platform: sun
-      event: sunrise
-      offset: "-01:00:00"
-    action:
-      service: switch.turn_off
-      entity_id: 
-        - switch.TD06
-        - switch.TD07
+#  - alias: Turn off when sun rise
+#    initial_state: True
+#    hide_entity: False
+#    trigger:
+#      platform: sun
+#      event: sunrise
+#      offset: "-01:00:00"
+#    action:
+#      service: switch.turn_off
+#      entity_id: 
+#        - switch.TD06
+#        - switch.TD07
 
-  - alias: Turn off the lights at evening
-    initial_state: True
-    hide_entity: False
-    trigger:
-      platform: time
-      at: "23:00:00"
-    action:
-      - service: switch.turn_off
-        entity_id: 
-          - switch.TD06
-          - switch.TD07
-      - service: light.turn_off
-        entity_id: 
-          - light.tvattstuga
-          - light.Koksbord
-          - light.kron1
-
-
-  - alias: Turn on tvatt with motion
-    trigger:
-      platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor_
-      to: 'on'
-    action:
-      - service: light.turn_on
-        entity_id: light.tvattstuga
-        data_template:
-          kelvin: >
-            {% if now().hour >= 20 %}
-              2500
-            {% elif now().hour < 5  %}
-              1
-            {% else %}
-              3000
-            {% endif %}
-          brightness_pct: >
-            {% if states('light.tvattstuga') == 'off' %}
-              10
-            {% elif  state_attr('light.tvattstuga','brightness') < 20 %}
-              25
-            {% else %}
-              state_attr('light.tvattstuga','brightness') + 1
-            {% endif %}
-      - delay: '00:00:01'
-      - service: light.turn_on
-        entity_id: light.tvattstuga
-        data_template:
-          brightness_pct: >
-            {% if now().hour < 5  %}
-              20
-            {% else %}
-              90
-            {% endif %}  
-          transition: '8'
-
-  - alias: Dim tvatt no motion 5
-    trigger:
-      platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor_
-      to: 'off'
-      for:
-        minutes: 3
-#        seconds: 15
-    action:
-      service: light.turn_on
-      entity_id: light.tvattstuga
-      data:
-        brightness_pct: 1
-        transition: 10
+#  - alias: Turn off the lights at evening
+#    initial_state: True
+#    hide_entity: False
+#    trigger:
+#      platform: time
+#      at: "23:00:00"
+#    action:
+#      - service: switch.turn_off
+#        entity_id: 
+#          - switch.TD06
+#          - switch.TD07
+#      - service: light.turn_off
+#        entity_id: 
+#          - light.tvattstuga
+#          - light.Koksbord
+#          - light.kron1
 
 
-  - alias: Turn off tvatt no motion 10 
-    trigger:
-      platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor_
-      to: 'off'
-      for:
-        minutes: 9 
-#        seconds: 30
-    action:
-      service: light.turn_off
-      entity_id: light.tvattstuga
+
+#  - alias: Tvrum ON inget dagsljus
+#    trigger:
+#      platform: state
+#      entity_id: sensor.daylight
+#      to: 'sunset_start'
+#    action:
+#      service: switch.turn_on
+#      entity_id: switch.TD08
 
 
-  - alias: Tvrum ON inget dagsljus
-    trigger:
-      platform: state
-      entity_id: sensor.daylight
-      to: 'sunset_start'
-    action:
-      service: switch.turn_on
-      entity_id: switch.TD08
+#  - alias: Tvrum OFF vid  dagsljus
+#    trigger:
+#      platform: state
+#      entity_id: sensor.daylight
+#      to: 'sunrise_end'
+#    action:
+#      service: switch.turn_off
+#      entity_id: switch.TD08 
 
-
-  - alias: Tvrum OFF vid  dagsljus
-    trigger:
-      platform: state
-      entity_id: sensor.daylight
-      to: 'sunrise_end'
-    action:
-      service: switch.turn_off
-      entity_id: switch.TD08 
-
-  - alias: Tvrum ON morgon
-    trigger:
-      - platform: time
-        at: '05:00'
-    condition:
-      condition: state
-      entity_id: sensor.daylight
-      state: 'nadir'
-    action:
-      service: switch.turn_on
-      entity_id: switch.TD08 
+#  - alias: Tvrum ON morgon
+#    trigger:
+#      - platform: time
+#        at: '05:00'
+#    condition:
+#      condition: state
+#      entity_id: sensor.daylight
+#      state: 'nadir'
+#    action:
+#      service: switch.turn_on
+#      entity_id: switch.TD08 

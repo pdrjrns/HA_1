@@ -1,9 +1,9 @@
-switch.01_axel:
-  icon: mdi:smile
-weather.smhi_malsryd:
-  hidden: false
-sensor.speedtest_ping:
-  rgb_color: 200,100,30
+#switch.01_axel:
+#  icon: mdi:smile
+#weather.smhi_malsryd:
+#  hidden: false
+#sensor.speedtest_ping:
+#  rgb_color: 200,100,30
 
 switch.TD08:
   friendly_name: TV Rum
@@ -11,3 +11,6 @@ switch.TD07:
   friendly_name: Trappa Fackla
 switch.TD06:
     friendly_name: Matsal Fackla
+
+
+
