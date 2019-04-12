@@ -14,8 +14,10 @@ group:
       - light.kok
       - light.hall
       - light.matsal
+      - light.damrum
       - light.tvattstuga
       - light.axel
+      - light.ute
 
   thefamily:
     name: Familjen

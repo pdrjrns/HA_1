@@ -1,0 +1,53 @@
+################################################
+#                                              #
+#  Styra utelampor efter dagsljus              #
+#                                              #
+################################################
+
+
+
+automation:
+  - alias: 'Out Light Sunset'
+    trigger:
+      - platform: state
+        entity_id: sensor.daylight
+        to: 'sunset_start'
+    action:
+      service: light.turn_on
+      entity_id: group.group_light_daylight
+      data:
+        brightness_pct: 80
+   
+  - alias: 'Out Light Night'
+    trigger:
+      - platform: state
+        entity_id: sensor.daylight
+        to: 'night_start'
+    action:
+      service: light.turn_on
+      entity_id: group.group_light_daylight
+      data:
+        brightness_pct: 30
+
+
+   
+  - alias: 'Out Light Morning'
+    trigger:
+      - platform: state
+        entity_id: sensor.daylight
+        to: 'night_end'
+    action:
+      service: light.turn_on
+      entity_id: group.group_light_daylight
+      data:
+        brightness_pct: 50
+   
+  - alias: 'Out Light Day'
+    trigger:
+      - platform: state
+        entity_id: sensor.daylight
+        to: 'dawn'
+    action:
+      service: light.turn_off
+      entity_id: group.group_light_daylight
+

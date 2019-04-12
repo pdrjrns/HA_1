@@ -1,0 +1,21 @@
+# Some test for tracking elforbrukning #
+
+
+input_number:
+  elforbrukning:
+    name: elforbrukningen
+    mode: box
+    min: 0
+    max: 25
+
+sensor:
+  - platform: template
+    sensors:
+      current_el_forbr:
+        unit_of_measurement: 'kW'
+        value_template: '{{ states.input_number.elforbrukning.state }}'
+
+# exaple platform #
+# locatedi on custom_control / example / sensor.py #
+#  - platform: example
+

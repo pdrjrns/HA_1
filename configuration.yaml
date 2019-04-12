@@ -27,6 +27,9 @@ frontend:
 # Enables configuration UI
 config:
 
+# Enable system_health
+system_health:
+
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 # http:
 #   base_url: example.duckdns.org:8123
@@ -48,6 +51,19 @@ conversation:
 
 # Enables support for tracking state changes over time
 history:
+  include:
+    domains:
+      - sensor
+      - switch
+      - light
+
+recorder:
+  purge_keep_days: 10
+  include:
+    domains:
+      - sensor
+      - switch
+      - light
 
 # View all events in a logbook
 logbook:
@@ -113,9 +129,9 @@ history_graph:
   gr_temperatue:
     name: Temperature
     entities:
-      - sensor.1_ute_temperature
-      - sensor.2_uppe_temperature
-      - sensor.3_nere_temperature
+      - sensor.1_ute_temperature_2
+      - sensor.2_uppe_temperature_2
+      - sensor.3_nere_temperature_2
     hours_to_show: 220
 #    refresh: 60
 
@@ -131,10 +147,13 @@ device_tracker:
     new_device_defaults:
       track_new_devices: false
 
-cast:
-  media_player:
-    - host: 192.168.0.10
-    - host: 192.168.0.11
+  - platform: bluetooth_tracker
+
+
+# cast:
+#  media_player:
+#    - host: 192.168.0.10
+#    - host: 192.168.0.11
 
 
 # debug deConz 181216
@@ -149,3 +168,5 @@ logger:
 #device_tracker:
 #  - platform: bluetooth_tracker
 
+# Enable API 190202
+api:

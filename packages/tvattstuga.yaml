@@ -5,7 +5,7 @@ automation:
   - alias: Turn on tvatt with motion
     trigger:
       platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor_
+      entity_id: binary_sensor.tradfri_motion_sensor
       to: 'on'
     action:
       - service: light.turn_on
@@ -23,10 +23,11 @@ automation:
             {% if states('light.tvattstuga') == 'off' %}
               10
             {% elif  state_attr('light.tvattstuga','brightness') < 20 %}
-              25
+              20
             {% else %}
-              state_attr('light.tvattstuga','brightness') + 1
+              90
             {% endif %}
+#              state_attr('light.tvattstuga','brightness') + 1
       - delay: '00:00:01'
       - service: light.turn_on
         entity_id: light.tvattstuga
@@ -42,7 +43,7 @@ automation:
   - alias: Dim tvatt no motion 5
     trigger:
       platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor_
+      entity_id: binary_sensor.tradfri_motion_sensor
       to: 'off'
       for:
         minutes: 3
@@ -58,7 +59,7 @@ automation:
   - alias: Turn off tvatt no motion 10 
     trigger:
       platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor_
+      entity_id: binary_sensor.tradfri_motion_sensor
       to: 'off'
       for:
         minutes: 9 

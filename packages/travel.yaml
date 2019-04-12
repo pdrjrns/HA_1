@@ -1,0 +1,12 @@
+sensor:
+  - platform: vasttrafik
+    key: !secret vt_key
+    secret: !secret vt_secret
+    departures:
+      - name: Mot Borås
+        from: Målsryds kyrka, Borås
+        heading: Borås
+#        lines:
+#          - 7
+#          - GRÖN
+        delay: 0

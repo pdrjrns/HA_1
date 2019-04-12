@@ -22,11 +22,12 @@ view_network:
   entities:
     - history_graph.network_speed
     - history_graph.ping
-    - sensor.cpu_speed
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
-    - sensor.speedtest_ping
-    - sensor.release
+#    - sensor.speedtest_download
+#    - sensor.speedtest_upload
+#    - sensor.speedtest_ping
+#    - sensor.release
+    - group.group_nw_performance
+    - group.group_srv_performance
 
 # ---- Groups -----
 group_nw_performance:
@@ -35,12 +36,29 @@ group_nw_performance:
     - sensor.speedtest_download
     - sensor.speedtest_upload
     - sensor.speedtest_ping
-    - sensor.cpu_speed
+#    - sensor.cpu_speed
+
+group_srv_performance:
+  name: Server
+  entities:
+    - sensor.memory_use_percent
+    - sensor.disk_use_percent
+    - sensor.processor_use
+    - sensor.release
 
 group_my_temperature:
   name: Termometrar
   view: false
   entities:
-    - sensor.1_ute_temperature
-    - sensor.2_uppe_temperature
-    - sensor.3_nere_temperature
+    - sensor.1_ute_temperature_2
+    - sensor.2_uppe_temperature_2
+    - sensor.3_nere_temperature_2
+
+
+# Light groups
+group_light_daylight:
+  name: LightDayLight
+  entities:
+    - light.innedaylight
+    - light.ute
+

@@ -8,16 +8,16 @@ sensor:
   # CPU Speed
 #  - platform: cpuspeed
 
-  # Network speed
-  - platform: speedtest
-    server_id: 6062
-    minute:
-#      - 0
-      - 30
-    monitored_conditions:
-      - ping
-      - download
-      - upload
+#  # Network speed
+#  - platform: speedtest
+#    server_id: 6062
+#    minute:
+##      - 0
+#      - 30
+#    monitored_conditions:
+#      - ping
+#      - download
+#      - upload
 
 # System monitor
   - platform: systemmonitor
@@ -27,4 +27,14 @@ sensor:
       - type: memory_use_percent
       - type: processor_use
       - type: last_boot
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+  server_id: 6062
+
 
